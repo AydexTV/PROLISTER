@@ -1,0 +1,9 @@
+https://colorhunt.co/palette/405d72758694f7e7dcfff8f3
+
+405D72 rgb(64, 93, 114)
+
+758694 rgb(117, 134, 148)
+
+F7E7DC rgb(247, 231, 220)
+
+FFF8F3 rgb(255, 248, 243)
