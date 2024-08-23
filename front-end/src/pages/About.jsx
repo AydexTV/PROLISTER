@@ -3,7 +3,7 @@ import NavBar from "../components/NavBar";
 const About = () => {
   return (
     <div>
-      <NavBar />
+      <NavBar userStatus = "loggedIn" activeTab = "about" />
       About
     </div>
   );
