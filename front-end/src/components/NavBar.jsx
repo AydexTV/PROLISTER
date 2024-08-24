@@ -1,17 +1,17 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-const NavBar = (props) => {
+const NavBar = ({isLoggedIn, activeTab}) => {
   const [isUserDropDownOpen, setUserDropDownMenu] = useState(false);
   const [isNavDropDownOpen, setNavDropDownMenu] = useState(false);
 
-  if (props.userStatus == "loggedIn") {
-    var isLoggedIn = true;
-  } else {
-    var isLoggedIn = false;
-  }
+  // if (props.userStatus == "loggedIn") {
+  //   var isLoggedIn = true;
+  // } else {
+  //   var isLoggedIn = false;
+  // }
   const activeTabClasses =
-  "block py-2 px-3 text-[black] bg-[#F7E7DC] md:bg-[transparent] md:rounded-none rounded md:text-[#FFF8F3] md:p-0 md:pl-3 md:pr-3 border-b-2 border-[#758694]";
-
+    "block py-2 px-3 text-[black] bg-[#F7E7DC] md:bg-[transparent] md:rounded-none rounded md:text-[#FFF8F3] md:p-0 md:pl-3 md:pr-3 border-b-2 border-[#758694]";
 
   const inActiveTabClasses =
     "block py-2 px-3 text-[#FFF8F3] rounded hover:bg-[#405D72] md:hover:bg-transparent md:hover:text-[#758694] md:p-0";
@@ -102,12 +102,12 @@ const NavBar = (props) => {
               </div>
             </div>
           ) : (
-            <button
-              type="button"
-              className="text-white bg-[#758694] hover:bg-[#F7E7DC] hover:text-[black] font-medium rounded-3xl text-sm px-4 py-2 text-center"
+            <Link
+              to="/login"
+              className="text-white bg-[#758694] hover:bg-[#F7E7DC] hover:text-[black] font-medium rounded-3xl text-sm px-4 py-2 text-center inline-block"
             >
               Login
-            </button>
+            </Link>
           )}
 
           <button
@@ -144,40 +144,40 @@ const NavBar = (props) => {
         >
           <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-[#758694] rounded-lg bg-[transparent] md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-[#405D72]">
             <li>
-              <a
-                href="/"
+              <Link
+                to="/"
                 className={
-                  props.activeTab == "home"
+                  activeTab === "home"
                     ? activeTabClasses
                     : inActiveTabClasses
                 }
               >
                 Home
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/about"
+              <Link
+                to="/about"
                 className={
-                  props.activeTab == "about"
+                  activeTab === "about"
                     ? activeTabClasses
                     : inActiveTabClasses
                 }
               >
                 About
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/listings"
+              <Link
+                to="/listings"
                 className={
-                  props.activeTab == "listings"
+                  activeTab === "listings"
                     ? activeTabClasses
                     : inActiveTabClasses
                 }
               >
                 Listings
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

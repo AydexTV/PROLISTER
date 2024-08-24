@@ -3,7 +3,7 @@ import NavBar from "../components/NavBar";
 const Listings = () => {
   return (
     <div>
-      <NavBar userStatus = "loggedIn" activeTab = "listings" />
+      <NavBar isLoggedIn = {false} activeTab = "listings" />
       Listings
     </div>
   );
