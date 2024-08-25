@@ -1,11 +1,13 @@
 import NavBar from "../components/NavBar";
 import Carousel from "../components/Carousel";
+import SearchForm from "../components/SearchForm";
+import Footer from "../components/Footer";
+import backgroundImage from "../assets/images/lifestyle-home-house-garden-wallpaper-preview.jpg";
 
 const Home = () => {
-
   const slides = [
     {
-      url: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2620&q=80",
+      url: backgroundImage,
     },
     {
       url: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80",
@@ -24,9 +26,15 @@ const Home = () => {
 
   return (
     <div>
-      <NavBar isLoggedIn = {false} activeTab = "home" />
-      <Carousel slides={slides}/>
-      Home
+      <NavBar isLoggedIn={false} activeTab="home" />
+      <div className="flex flex-col justify-center p-10">
+        <h1 className="font-bold text-center text-5xl py-15">
+          Welcome to ProLister
+        </h1>
+        <Carousel slides={slides} />
+        <SearchForm />
+      </div>
+      <Footer />
     </div>
   );
 };

@@ -22,31 +22,31 @@ const Carousel = ({ slides }) => {
   };
 
   return (
-    <div className="max-w-[1400px] h-[780px] w-full m-auto py-16 px-4 relative group">
-      <div className="relative w-full h-full overflow-hidden rounded-3xl">
+    <div className="relative w-full m-2 py-16 px-1 max-w-screen-xl mx-auto">
+      <div className="relative w-full h-0 pb-[56.25%] overflow-hidden rounded-3xl">
         <div
-          className="flex transition-transform ease-out duration-500"
+          className="absolute top-0 left-0 w-full h-full flex transition-transform ease-out duration-500"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
           {slides.map((slide, index) => (
             <div
               key={index}
-              className="w-full h-[780px] flex-shrink-0 bg-center bg-cover"
-              style={{ backgroundImage: `url(${slide.url})` }}
+              className="w-full flex-shrink-0 h-full bg-center bg-cover"
+              style={{ backgroundImage: `url(${slide.url})`, backgroundSize: 'cover' }}
             ></div>
           ))}
         </div>
       </div>
       {/* Left Arrow */}
-      <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/30 text-white cursor-pointer">
+      <div className="absolute top-1/2 -translate-x-0 -translate-y-1/2 left-5 text-2xl rounded-full p-2 bg-black/30 text-white cursor-pointer">
         <BsChevronCompactLeft onClick={prevSlide} size={30} />
       </div>
       {/* Right Arrow */}
-      <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/30 text-white cursor-pointer">
+      <div className="absolute top-1/2 -translate-x-0 -translate-y-1/2 right-5 text-2xl rounded-full p-2 bg-black/30 text-white cursor-pointer">
         <BsChevronCompactRight onClick={nextSlide} size={30} />
       </div>
       {/* Dots */}
-      <div className="flex top-4 justify-center py-2">
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
         {slides.map((_, slideIndex) => (
           <div
             key={slideIndex}

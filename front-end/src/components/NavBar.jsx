@@ -5,11 +5,6 @@ const NavBar = ({isLoggedIn, activeTab}) => {
   const [isUserDropDownOpen, setUserDropDownMenu] = useState(false);
   const [isNavDropDownOpen, setNavDropDownMenu] = useState(false);
 
-  // if (props.userStatus == "loggedIn") {
-  //   var isLoggedIn = true;
-  // } else {
-  //   var isLoggedIn = false;
-  // }
   const activeTabClasses =
     "block py-2 px-3 text-[black] bg-[#F7E7DC] md:bg-[transparent] md:rounded-none rounded md:text-[#FFF8F3] md:p-0 md:pl-3 md:pr-3 border-b-2 border-[#758694]";
 
@@ -36,7 +31,7 @@ const NavBar = ({isLoggedIn, activeTab}) => {
             alt="Flowbite Logo"
           /> */}
           <span className="self-center text-2xl font-semibold whitespace-nowrap text-[#FFF8F3]">
-            PROLister
+            ProLister
           </span>
         </a>
         <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
