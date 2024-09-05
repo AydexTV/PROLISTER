@@ -1,12 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SearchForm = () => {
+  const navigate = useNavigate();
   const [selectedOption, setSelectedOption] = useState("1");
-
-  const handleChange = (event) => {
-    setSelectedOption(event.target.value);
-  };
-
+  const [city, setCity] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState([]);
 
@@ -25,10 +23,20 @@ const SearchForm = () => {
     });
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault(); // Prevent default form submission
+
+    // Navigate to the list view after form submission
+    navigate("/listview");
+  };
+
   return (
     <div className="flex justify-center py-10">
-      <form className="w-full max-w-screen-md bg-[#405D72]/40 py-8 px-6 rounded-3xl">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-4">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full max-w-screen-md bg-[#405D72]/65 py-8 px-6 rounded-3xl"
+      >
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:gap-4">
           {/* Radio Buttons For rent or buy */}
           <div className="flex space-x-2">
             <div>
@@ -39,11 +47,11 @@ const SearchForm = () => {
                 value="1"
                 className="peer hidden"
                 checked={selectedOption === "1"}
-                onChange={handleChange}
+                onChange={(e) => setSelectedOption(e.target.value)}
               />
               <label
                 htmlFor="1"
-                className="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-[#405D72] peer-checked:font-bold peer-checked:text-white"
+                className="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-black/70 peer-checked:font-bold peer-checked:text-white"
               >
                 Rent
               </label>
@@ -56,11 +64,11 @@ const SearchForm = () => {
                 value="2"
                 className="peer hidden"
                 checked={selectedOption === "2"}
-                onChange={handleChange}
+                onChange={(e) => setSelectedOption(e.target.value)}
               />
               <label
                 htmlFor="2"
-                className="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-[#405D72] peer-checked:font-bold peer-checked:text-white"
+                className="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-black/70 peer-checked:font-bold peer-checked:text-white"
               >
                 Buy
               </label>
@@ -71,7 +79,9 @@ const SearchForm = () => {
           <div className="relative flex-grow">
             <input
               type="text"
-              name="q"
+              name="city"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
               className="w-full h-12 shadow p-4 rounded-full bg-gray-200"
               placeholder="City"
             />
@@ -123,7 +133,7 @@ const SearchForm = () => {
 
           <button
             type="submit"
-            className="block w-full sm:w-20 cursor-pointer select-none rounded-xl p-2 text-center bg-[#405D72] font-bold text-white hover:bg-[#F7E7DC] hover:text-black"
+            className="block w-full lg:w-20 cursor-pointer select-none rounded-xl p-2 text-center bg-[#405D72] font-bold text-white hover:bg-[#F7E7DC] hover:text-black"
           >
             Search
           </button>

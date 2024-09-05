@@ -22,7 +22,7 @@ const NavBar = ({isLoggedIn, activeTab}) => {
   };
 
   return (
-    <nav className="bg-[#405D72] border-[#758694]">
+    <nav className="bg-[#405D72] border-[#758694] shadow-2xl">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
         <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
           {/* <img

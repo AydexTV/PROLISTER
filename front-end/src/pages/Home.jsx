@@ -26,7 +26,7 @@ const Home = () => {
 
   return (
     <div>
-      <NavBar isLoggedIn={false} activeTab="home" />
+      <NavBar isLoggedIn={true} activeTab="home" />
       <div className="flex flex-col justify-center p-10">
         <h1 className="font-bold text-center text-5xl py-15">
           Welcome to ProLister

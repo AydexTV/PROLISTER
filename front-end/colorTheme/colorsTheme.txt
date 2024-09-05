@@ -7,3 +7,6 @@ https://colorhunt.co/palette/405d72758694f7e7dcfff8f3
 F7E7DC rgb(247, 231, 220)
 
 FFF8F3 rgb(255, 248, 243)
+
+7a716a rgb(122, 113, 106) used for listings
+// I need to fix the Furnished to stop the conflict with the search form

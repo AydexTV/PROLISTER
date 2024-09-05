@@ -1,0 +1,5 @@
+Add property type in the filter section
+Then I have to modify the search form to also take property type from the user
+Change the listings page make it once entered u see search then after searching u get the results as the format of the listings page
+
+Add the Profile Page

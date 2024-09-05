@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 
-const RadioButton = () => {
-  const [selectedOption, setSelectedOption] = useState("1");
+const RadioButton = ({ options, handleRadioButton, defaultOption }) => {
+  const [selectedOption, setSelectedOption] = useState(defaultOption);
 
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
+    handleRadioButton(event.target.value); // Call the passed function with the selected value
   };
 
   return (
-    <div className="flex items-center space-x-2"> {/* Added spacing between items */}
+    <div className="flex items-center space-x-2">
       <div>
         <input
           type="radio"
@@ -23,7 +24,7 @@ const RadioButton = () => {
           htmlFor="1"
           className="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-[#405D72] peer-checked:font-bold peer-checked:text-white"
         >
-          Rent
+          {options[0]}
         </label>
       </div>
 
@@ -41,7 +42,7 @@ const RadioButton = () => {
           htmlFor="2"
           className="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-[#405D72] peer-checked:font-bold peer-checked:text-white"
         >
-          Buy
+          {options[1]}
         </label>
       </div>
     </div>
