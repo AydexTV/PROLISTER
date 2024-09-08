@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FilterSection from "../components/FilterSection";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
@@ -7,11 +7,24 @@ import PropertyCard from "../components/PropertyCard";
 import SearchForm from "../components/SearchForm";
 import RadioButton from "../components/RadioButton";
 import { IoFilterOutline } from "react-icons/io5";
+import axios from "axios";
 
 const ListView = () => {
   const navigate = useNavigate();
-
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [properties, setProperties] = useState([]);
+
+  useEffect(() => {
+    const fetchProperties = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/api/properties");
+        setProperties(response.data);
+      } catch (error) {
+        console.log("Error fetching properties:", error);
+      }
+    };
+    fetchProperties();
+  }, []);
 
   const handleOpenFilter = () => {
     setIsFilterOpen(true);
@@ -63,15 +76,10 @@ const ListView = () => {
             <h1 className="px-4">Filter</h1>
           </div>
 
-          <PropertyCard />
-          <PropertyCard />
-          <PropertyCard />
-          <PropertyCard />
-          <PropertyCard />
-          <PropertyCard />
-          <PropertyCard />
-          <PropertyCard />
-          <PropertyCard />
+          {properties.map((property) => (
+            <PropertyCard key={properties._id} property={property} />
+          ))}
+
         </div>
 
         <div className="2xl:block w-1/6 hidden"></div>

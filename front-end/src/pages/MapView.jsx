@@ -1,34 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import MapBox from "../components/MapBox";
 import RadioButton from "../components/RadioButton";
 import backgroundImage from "../assets/images/lifestyle-home-house-garden-wallpaper-preview.jpg";
 import Footer from "../components/Footer";
+import axios from "axios";
 
 const MapView = () => {
   const navigate = useNavigate();
+  const [markers, setMarkers] = useState([]);
 
-  const markers = [
-    {
-      coordinates: [23.625063, 58.489027],
-      popUpTitle: "House for sale",
-      popUpPrice: 1600,
-      popUpImage: backgroundImage,
-    },
-    {
-      coordinates: [23.592885, 58.421076],
-      popUpTitle: "1 House for sale",
-      popUpPrice: 1600,
-      popUpImage: backgroundImage,
-    },
-    {
-      coordinates: [23.638111, 58.128883],
-      popUpTitle: "2 House for sale",
-      popUpPrice: 1600,
-      popUpImage: backgroundImage,
-    },
-  ];
+  useEffect(() => {
+    const fetchProperties = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/api/properties");
+        const properties = response.data;
+
+        // Map properties to markers
+        const markersData = properties.map((property) => ({
+          coordinates: [property.location.coordinates[0], property.location.coordinates[1]],
+          popUpTitle: property.title,
+          popUpPrice: property.price,
+          popUpImage: `http://localhost:3000/${property.images[0].replace(/\\/g, "/")}`,
+        }));
+
+        setMarkers(markersData);
+      } catch (error) {
+        console.log("Error fetching properties:", error);
+      }
+    };
+
+    fetchProperties();
+  }, []);
 
   const handleRadioButton = (option) => {
     if (option === "1") { // Assuming "List" corresponds to the second option with value "2"

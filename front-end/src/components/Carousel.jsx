@@ -22,7 +22,7 @@ const Carousel = ({ slides }) => {
   };
 
   return (
-    <div className="relative w-full py-10 px-1 max-w-screen-xl mx-auto">
+    <div className="relative w-full md:w-[700px] lg:w-[1000px] xl:w-[1200px] py-10 px-1 max-w-screen-xl mx-auto">
       <div className="relative w-full h-0 pb-[56.25%] overflow-hidden rounded-3xl">
         <div
           className="absolute top-0 left-0 w-full h-full flex transition-transform ease-out duration-500"

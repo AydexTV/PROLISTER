@@ -50,7 +50,7 @@ const MapBox = ({ markers }) => {
                 <h1 className="text-2xl text-black mt-5">
                   {marker.popUpTitle}
                 </h1>
-                <p className="text-base">{marker.popUpPrice} USD</p>
+                <p className="text-base">{marker.popUpPrice} R.O</p>
               </div>
             </Popup>
           </Marker>
