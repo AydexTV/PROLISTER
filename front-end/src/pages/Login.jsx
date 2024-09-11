@@ -4,6 +4,11 @@ import Footer from "../components/Footer";
 import backgroundImage from "../assets/images/lifestyle-home-house-garden-wallpaper-preview.jpg";
 
 const Login = () => {
+
+  const loginUser = (e) => {
+    e.preventDefault();
+  }
+
   return (
     <div>
       <NavBar />
@@ -25,7 +30,7 @@ const Login = () => {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-950 md:text-2xl">
                 Sign in to your account
               </h1>
-              <form className="space-y-4 md:space-y-6">
+              <form className="space-y-4 md:space-y-6" onSubmit={loginUser}>
                 <div>
                   <label
                     htmlFor="email"

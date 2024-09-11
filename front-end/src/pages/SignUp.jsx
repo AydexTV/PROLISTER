@@ -4,6 +4,11 @@ import Footer from "../components/Footer";
 import backgroundImage from "../assets/images/lifestyle-home-house-garden-wallpaper-preview.jpg";
 
 const SignUp = () => {
+
+  const registerUser = (e) => {
+    e.preventDefault();
+  }
+
   return (
     <div>
       <NavBar />
@@ -25,7 +30,23 @@ const SignUp = () => {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-black md:text-2xl">
                 Create a new account
               </h1>
-              <form className="space-y-4 md:space-y-6">
+              <form className="space-y-4 md:space-y-6" onSubmit={registerUser}>
+                <div>
+                  <label
+                    htmlFor="name"
+                    className="block mb-2 text-sm font-medium text-gray-950"
+                  >
+                    Your Full Name
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    className="bg-gray-50 border border-gray-300 text-gray-950 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                    placeholder="Enter Your Full Name"
+                    required
+                  />
+                </div>
                 <div>
                   <label
                     htmlFor="email"
@@ -57,6 +78,8 @@ const SignUp = () => {
                     className="bg-gray-50 mb-5 border border-gray-300 text-gray-950 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                     required
                   />
+                </div>
+                <div>
                   <label
                     htmlFor="confirmPassword"
                     className="block mb-2 text-sm font-medium text-gray-950"
@@ -72,6 +95,21 @@ const SignUp = () => {
                     required
                   />
                 </div>
+                <div>
+                  <label
+                    htmlFor="profilePicture"
+                    className="block mb-2 text-sm font-medium text-gray-950"
+                  >
+                    Upload Profile Picture
+                  </label>
+                  <input
+                    type="file"
+                    name="profilePicture"
+                    id="profilePicture"
+                    accept="image/*"
+                    className="bg-gray-50 border border-gray-300 text-gray-950 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                  />
+                </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-start">
                     <div className="flex items-center h-5">
@@ -80,11 +118,11 @@ const SignUp = () => {
                         aria-describedby="terms"
                         type="checkbox"
                         className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300"
+                        required
                       />
                     </div>
                     <div className="ml-3 text-sm">
                       <p className="text-sm font-light text-[#FFF8F3]">
-                        {" "}
                         I accept the{" "}
                         <a
                           href="#"
