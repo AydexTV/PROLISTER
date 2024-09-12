@@ -1,9 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import axios from "axios"; // Import axios
+import { UserContext } from "../../context/userContext";
+import pfp from "../assets/images/pfp.jpg";
 
-const NavBar = ({isLoggedIn, activeTab}) => {
+const NavBar = ({ activeTab }) => {
+  const navigate = useNavigate();
+  const { user, setUser } = useContext(UserContext);
+
+  const [isLoggedIn, setLoggedIn] = useState(false);
   const [isUserDropDownOpen, setUserDropDownMenu] = useState(false);
   const [isNavDropDownOpen, setNavDropDownMenu] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
+    }
+  }, [user]);
 
   const activeTabClasses =
     "block py-2 px-3 text-[black] bg-[#F7E7DC] md:bg-[transparent] md:rounded-none rounded md:text-[#FFF8F3] md:p-0 md:pl-3 md:pr-3 border-b-2 border-[#758694]";
@@ -21,15 +37,20 @@ const NavBar = ({isLoggedIn, activeTab}) => {
     setUserDropDownMenu(false);
   };
 
+  const handleLogout = async () => {
+    try {
+      await axios.post("http://localhost:3000/api/auth/logout", {}, { withCredentials: true });
+      setUser(null); // Clear user from context
+      window.location.href = "/";
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
+
   return (
     <nav className="bg-[#405D72] border-[#758694] shadow-2xl">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
         <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
-          {/* <img
-            src="https://flowbite.com/docs/images/logo.svg"
-            className="h-8"
-            alt="Flowbite Logo"
-          /> */}
           <span className="self-center text-2xl font-semibold whitespace-nowrap text-[#FFF8F3]">
             ProLister
           </span>
@@ -49,11 +70,10 @@ const NavBar = ({isLoggedIn, activeTab}) => {
                 <span className="sr-only">Open user menu</span>
                 <img
                   className="w-9 h-9 rounded-full"
-                  src="https://pbs.twimg.com/profile_images/1562240372100800512/m3qbdQhK_400x400.jpg"
+                  src={pfp}
                   alt="user photo"
                 />
               </button>
-              {/* <!-- Dropdown menu --> */}
               <div
                 className={`absolute ${
                   isUserDropDownOpen ? "" : "hidden"
@@ -62,10 +82,10 @@ const NavBar = ({isLoggedIn, activeTab}) => {
               >
                 <div className="px-4 py-3">
                   <span className="block text-sm text-[#758694]">
-                    Aymen Ajinou
+                    {user.name}
                   </span>
                   <span className="block text-sm text-[#758694] truncate">
-                    aymenajinou@gmail.com
+                    {user.email}
                   </span>
                 </div>
                 <ul className="py-2" aria-labelledby="user-menu-button">
@@ -74,7 +94,7 @@ const NavBar = ({isLoggedIn, activeTab}) => {
                       href="#"
                       className="block px-4 py-2 text-sm text-[#758694] hover:bg-[#405D72] hover:text-[#758694]"
                     >
-                      Dashboard
+                      My Profile
                     </a>
                   </li>
                   <li>
@@ -82,16 +102,16 @@ const NavBar = ({isLoggedIn, activeTab}) => {
                       href="#"
                       className="block px-4 py-2 text-sm text-[#758694] hover:bg-[#405D72] hover:text-[#758694]"
                     >
-                      Settings
+                      My Listings
                     </a>
                   </li>
                   <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-[red] hover:bg-[#405D72] hover:text-[#758694]"
+                    <button
+                      className="block px-4 py-2 text-sm w-full text-[red] hover:bg-[#405D72] hover:text-[#758694]"
+                      onClick={handleLogout}
                     >
                       Sign out
-                    </a>
+                    </button>
                   </li>
                 </ul>
               </div>

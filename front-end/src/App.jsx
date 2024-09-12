@@ -8,6 +8,7 @@ import SignUp from "./pages/SignUp";
 import Property from "./pages/Property";
 import MapView from "./pages/MapView";
 import ListView from "./pages/ListView";
+import Profile from "./pages/Profile";
 import { Toaster } from "react-hot-toast";
 import NavBar from "./components/NavBar";
 import { UserContextProvider } from "../context/userContext"; // Capitalized
@@ -31,6 +32,7 @@ const App = () => {
         <Route path="/property/:id" element={<Property />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </UserContextProvider>
   );

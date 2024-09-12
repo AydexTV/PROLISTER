@@ -1,2 +1,11 @@
-remove search
-make listings page have two divs one list view and one map view
+remove search and filter
+
+add profile/id (WORKING ON THIS)
+
+add post listings
+
+add user sees listings with posted by them (they can edit and delete)
+
+add agreement page
+
+add some static About page with some info about ProLister

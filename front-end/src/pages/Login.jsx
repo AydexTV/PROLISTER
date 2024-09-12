@@ -32,7 +32,7 @@ const Login = () => {
       } else {
         setData({});
         toast.success("Login Successful. Welcome!");
-        navigate("/");
+        window.location.href = "/";
       }
     } catch (error) {
       console.log(error);

@@ -33,7 +33,7 @@ const SignUp = () => {
         toast.error(data.error)
       } else {
         setData({})
-        toast.success("Login Successful. Welcome!")
+        toast.success("SignUp Successful. Welcome! Please Login To Your Account")
         navigate("/login")
       }
     } catch (error) {
