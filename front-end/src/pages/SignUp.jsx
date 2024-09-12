@@ -1,17 +1,49 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import backgroundImage from "../assets/images/lifestyle-home-house-garden-wallpaper-preview.jpg";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
-  const registerUser = (e) => {
+  const registerUser = async (e) => {
     e.preventDefault();
-  }
+    const { name, email, password } = data;
+    try {
+      // axios returns many things among them data here we destructure and save data in a variable called data
+      const { data } = await axios.post(
+        "http://localhost:3000/api/auth/signup",
+        {
+          name,
+          email,
+          password,
+        }
+      );
+      
+      if (data.error) {
+        toast.error(data.error)
+      } else {
+        setData({})
+        toast.success("Login Successful. Welcome!")
+        navigate("/login")
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  };
 
   return (
     <div>
-      <NavBar />
+      {/* <NavBar /> */}
       <div
         className="relative flex flex-col items-center justify-center px-6 py-8 mx-auto min-h-screen md:h-screen lg:py-0"
         style={{
@@ -42,6 +74,8 @@ const SignUp = () => {
                     type="text"
                     name="name"
                     id="name"
+                    value={data.name}
+                    onChange={(e) => setData({ ...data, name: e.target.value })}
                     className="bg-gray-50 border border-gray-300 text-gray-950 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                     placeholder="Enter Your Full Name"
                     required
@@ -58,6 +92,10 @@ const SignUp = () => {
                     type="email"
                     name="email"
                     id="email"
+                    value={data.email}
+                    onChange={(e) =>
+                      setData({ ...data, email: e.target.value })
+                    }
                     className="bg-gray-50 border border-gray-300 text-gray-950 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                     placeholder="name@examle.com"
                     required
@@ -74,28 +112,16 @@ const SignUp = () => {
                     type="password"
                     name="password"
                     id="password"
+                    value={data.password}
+                    onChange={(e) =>
+                      setData({ ...data, password: e.target.value })
+                    }
                     placeholder="••••••••"
                     className="bg-gray-50 mb-5 border border-gray-300 text-gray-950 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                     required
                   />
                 </div>
-                <div>
-                  <label
-                    htmlFor="confirmPassword"
-                    className="block mb-2 text-sm font-medium text-gray-950"
-                  >
-                    Confirm Password
-                  </label>
-                  <input
-                    type="password"
-                    name="confirmPassword"
-                    id="confirmPassword"
-                    placeholder="••••••••"
-                    className="bg-gray-50 border border-gray-300 text-gray-950 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                    required
-                  />
-                </div>
-                <div>
+                {/* <div>
                   <label
                     htmlFor="profilePicture"
                     className="block mb-2 text-sm font-medium text-gray-950"
@@ -109,7 +135,7 @@ const SignUp = () => {
                     accept="image/*"
                     className="bg-gray-50 border border-gray-300 text-gray-950 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                   />
-                </div>
+                </div> */}
                 <div className="flex items-center justify-between">
                   <div className="flex items-start">
                     <div className="flex items-center h-5">

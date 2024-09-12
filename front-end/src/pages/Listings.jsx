@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const Listings = () => {
   return (
     <div>
-      <NavBar isLoggedIn={false} activeTab="listings" />
+      {/* <NavBar isLoggedIn={false} activeTab="listings" /> */}
       
       <div className="relative flex flex-col justify-center items-center h-lvh overflow-hidden">
         {/* Blurred Background Image */}

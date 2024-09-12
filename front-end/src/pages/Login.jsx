@@ -1,17 +1,47 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import backgroundImage from "../assets/images/lifestyle-home-house-garden-wallpaper-preview.jpg";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
 
-  const loginUser = (e) => {
+  const loginUser = async (e) => {
     e.preventDefault();
-  }
+    const { email, password } = data;
+    try {
+      // axios returns many things among them data here we destructure and save data in a variable called data
+      const { data } = await axios.post(
+        "http://localhost:3000/api/auth/login",
+        {
+          email,
+          password,
+        }
+      );
+
+      if (data.error) {
+        toast.error(data.error);
+      } else {
+        setData({});
+        toast.success("Login Successful. Welcome!");
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
-      <NavBar />
+      {/* <NavBar /> */}
       <div
         className="relative flex flex-col items-center justify-center px-6 py-8 mx-auto min-h-screen md:h-screen lg:py-0"
         style={{
@@ -42,6 +72,10 @@ const Login = () => {
                     type="email"
                     name="email"
                     id="email"
+                    value={data.email}
+                    onChange={(e) =>
+                      setData({ ...data, email: e.target.value })
+                    }
                     className="bg-gray-50 border border-gray-300 text-gray-950 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                     placeholder="name@examle.com"
                     required
@@ -58,6 +92,10 @@ const Login = () => {
                     type="password"
                     name="password"
                     id="password"
+                    value={data.password}
+                    onChange={(e) =>
+                      setData({ ...data, password: e.target.value })
+                    }
                     placeholder="••••••••"
                     className="bg-gray-50 border border-gray-300 text-gray-950 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                     required
@@ -75,13 +113,13 @@ const Login = () => {
                     </div>
                     <div className="ml-3 text-sm">
                       <label htmlFor="remember" className="text-[#FFF8F3]">
-                        Remember me
+                        Remember me {" "}
                       </label>
                     </div>
                   </div>
                   <a
                     href="#"
-                    className="text-sm font-medium text-gray-950 hover:underline"
+                    className="ml-2 text-sm font-medium text-gray-950 hover:underline"
                   >
                     Forgot password?
                   </a>

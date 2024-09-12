@@ -65,7 +65,7 @@ const Property = () => {
 
   return (
     <div>
-      <NavBar isLoggedIn={false} />
+      {/* <NavBar isLoggedIn={false} /> */}
       {/* Top Section where we show Title and photos */}
       <div className="flex justify-center">
         <div className="flex flex-col justify-center m-10 2xl:text-4xl text-3xl">

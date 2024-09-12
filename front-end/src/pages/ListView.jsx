@@ -42,7 +42,7 @@ const ListView = () => {
 
   return (
     <div>
-      <NavBar isLoggedIn={false} activeTab="listings" />
+      {/* <NavBar isLoggedIn={false} activeTab="listings" /> */}
 
       <div className="flex justify-center my-10">
         <RadioButton options={["List", "Map"]} handleRadioButton={handleRadioButton} defaultOption={"1"} />
