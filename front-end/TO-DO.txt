@@ -1,11 +1,12 @@
-remove search and filter
+remove search and filter (Done)
 
-add profile/id (WORKING ON THIS)
+add profile (Done)
 
-add post listings
-
-add user sees listings with posted by them (they can edit and delete)
+add post listings (Done)
 
 add agreement page
 
-add some static About page with some info about ProLister
+remove About page and add some static some info about ProLister in Home
+
+add protected Routes
+

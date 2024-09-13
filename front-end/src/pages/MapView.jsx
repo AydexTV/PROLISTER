@@ -47,7 +47,7 @@ const MapView = () => {
         <RadioButton options={["List", "Map"]} handleRadioButton={handleRadioButton} defaultOption={"2"} />
       </div>
       <div className="flex flex-col justify-center items-center sm:h-[700px] h-96 sm:m-20 mx-2 mt-20 mb-36">
-        <h1 className="text-xl mb-4 text-center">Showing Results in Muscat</h1>
+      <h1 className="text-2xl mb-2">Showing Results</h1>
         <MapBox markers={markers} />
       </div>
       <Footer />

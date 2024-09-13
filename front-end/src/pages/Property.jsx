@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Carousel from "../components/Carousel";
 import NavBar from "../components/NavBar";
 import { IoLocationOutline } from "react-icons/io5";
@@ -9,10 +9,13 @@ import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import MapBox from "../components/MapBox";
+import pfp from "../assets/images/pfp.jpg";
 
 const Property = () => {
   const { id } = useParams();
   const [property, setProperty] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProperty = async () => {
@@ -59,7 +62,10 @@ const Property = () => {
       coordinates,
       popUpTitle: title,
       popUpPrice: price,
-      popUpImage: `http://localhost:3000/${property.images[0].replace(/\\/g, "/")}`,
+      popUpImage: `http://localhost:3000/${property.images[0].replace(
+        /\\/g,
+        "/"
+      )}`,
     },
   ];
 
@@ -77,7 +83,9 @@ const Property = () => {
                 {location.city}, {location.country}
               </p>
             </div>
-            <h1 className="text-right text-base 2xl:text-[25px]">{price} R.O</h1>
+            <h1 className="text-right text-base 2xl:text-[25px]">
+              {price} R.O/Month
+            </h1>
           </div>
           <hr className="mt-5"></hr>
           <Carousel slides={slides} />
@@ -117,11 +125,22 @@ const Property = () => {
         {/* Right side for landlord details and contact info */}
         <div className="basis-3/12 p-10 mt-10">
           <div className="flex flex-col items-center bg-[#405D72] h-96 w-full pt-10 rounded-2xl shadow-2xl">
-            <div className="rounded-full h-52 w-52 bg-white shadow-inner"></div>
+            <div
+              className="rounded-full h-52 w-52 shadow-inner"
+              style={{
+                backgroundImage: `url(${pfp})`, // Use template literals for dynamic URL
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+              }}
+            ></div>{" "}
             <h1 className="mt-4 text-white">{landlord}</h1>
-            <button className="mt-5 p-2 bg-[#758694] text-white hover:bg-[#F7E7DC] hover:text-[black] rounded-3xl shadow-2xl">
-              Contact Seller
-            </button>
+            <a
+              className="mt-5 p-2 bg-[#758694] text-white hover:bg-[#F7E7DC] hover:text-[black] rounded-3xl shadow-2xl"
+              href="/agreement"
+            >
+              Apply
+            </a>
           </div>
         </div>
       </div>

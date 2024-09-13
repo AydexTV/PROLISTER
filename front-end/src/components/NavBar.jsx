@@ -91,7 +91,7 @@ const NavBar = ({ activeTab }) => {
                 <ul className="py-2" aria-labelledby="user-menu-button">
                   <li>
                     <a
-                      href="#"
+                      href="/profile"
                       className="block px-4 py-2 text-sm text-[#758694] hover:bg-[#405D72] hover:text-[#758694]"
                     >
                       My Profile
@@ -99,10 +99,18 @@ const NavBar = ({ activeTab }) => {
                   </li>
                   <li>
                     <a
+                      href="/postlisting"
+                      className="block px-4 py-2 text-sm text-[#758694] hover:bg-[#405D72] hover:text-[#758694]"
+                    >
+                      Add Listing
+                    </a>
+                  </li>
+                  <li>
+                    <a
                       href="#"
                       className="block px-4 py-2 text-sm text-[#758694] hover:bg-[#405D72] hover:text-[#758694]"
                     >
-                      My Listings
+                      Applications
                     </a>
                   </li>
                   <li>

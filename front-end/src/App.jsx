@@ -9,10 +9,11 @@ import Property from "./pages/Property";
 import MapView from "./pages/MapView";
 import ListView from "./pages/ListView";
 import Profile from "./pages/Profile";
+import PostListing from "./pages/PostListing";
+import Agreement from "./pages/Agreement";
 import { Toaster } from "react-hot-toast";
 import NavBar from "./components/NavBar";
 import { UserContextProvider } from "../context/userContext"; // Capitalized
-
 import axios from "axios";
 
 // Set axios defaults for credentials
@@ -33,6 +34,8 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/postlisting" element={<PostListing />} />
+        <Route path="/agreement" element={<Agreement />} />
       </Routes>
     </UserContextProvider>
   );

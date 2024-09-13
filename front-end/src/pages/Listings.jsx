@@ -27,11 +27,11 @@ const Listings = () => {
 
         {/* Content */}
         <div className="relative flex lg:flex-row flex-col justify-center items-center w-4/6 m-10 z-10">
-          <Link className="flex flex-col justify-center items-center h-96 w-96 bg-[#F7E7DC]/30 hover:bg-[#F7E7DC]/90 rounded-3xl shadow-2xl m-5" to="/listview">
+          <Link className="flex flex-col justify-center items-center h-96 w-96 bg-[#F7E7DC]/30 hover:bg-[#F7E7DC]/90 rounded-3xl shadow-2xl m-5 transition-colors" to="/listview">
           <img className="h-72 w-auto" src={listImage} alt="listview" />
           <h1 className="text-[30px]">List View</h1>
           </Link>
-          <Link className="flex flex-col justify-center items-center h-96 w-96 bg-[#F7E7DC]/30 hover:bg-[#F7E7DC]/90 rounded-3xl shadow-2xl m-5" to="/mapview">
+          <Link className="flex flex-col justify-center items-center h-96 w-96 bg-[#F7E7DC]/30 hover:bg-[#F7E7DC]/90 rounded-3xl shadow-2xl m-5 transition-colors" to="/mapview">
           <img className="h-72 w-auto" src={mapImage} alt="mapview" />
           <h1 className="text-[30px]">Map View</h1>
           </Link>
