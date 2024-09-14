@@ -6,12 +6,14 @@ import { LiaToiletSolid, LiaBedSolid } from "react-icons/lia";
 import { TbMeterSquare } from "react-icons/tb";
 import backgroundImage from "../assets/images/lifestyle-home-house-garden-wallpaper-preview.jpg";
 import Footer from "../components/Footer";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import MapBox from "../components/MapBox";
 import pfp from "../assets/images/pfp.jpg";
+import { UserContext } from "../../context/userContext";
 
 const Property = () => {
+  const { user } = useContext(UserContext);
   const { id } = useParams();
   const [property, setProperty] = useState(null);
 
@@ -45,6 +47,7 @@ const Property = () => {
     bathrooms,
     area,
     landlord,
+    landlordId,
   } = property;
 
   // Ensure location and its properties exist before using them
@@ -136,8 +139,10 @@ const Property = () => {
             ></div>{" "}
             <h1 className="mt-4 text-white">{landlord}</h1>
             <a
-              className="mt-5 p-2 bg-[#758694] text-white hover:bg-[#F7E7DC] hover:text-[black] rounded-3xl shadow-2xl"
-              href="/agreement"
+              className="mt-5 p-2 bg-[#758694] text-white hover:bg-[#F7E7DC] hover:text-[black] rounded-3xl shadow-2xl cursor-pointer"
+              onClick={() =>
+                navigate("/agreement", { state: { propertyId: id, propertyTitle: title, landlordId: landlordId } })
+              } // Send title to Agreement page
             >
               Apply
             </a>

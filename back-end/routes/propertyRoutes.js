@@ -20,6 +20,7 @@ router.post("/", upload.array("images", 5), async (req, res) => {
       latitude,
       longitude,
       landlord,
+      landlordId,
     } = req.body;
 
     if (
@@ -34,7 +35,8 @@ router.post("/", upload.array("images", 5), async (req, res) => {
       !city ||
       !latitude ||
       !longitude ||
-      !landlord
+      !landlord ||
+      !landlordId
     ) {
       return res.status(400).send({
         message: "Please provide all required fields",
@@ -65,6 +67,7 @@ router.post("/", upload.array("images", 5), async (req, res) => {
       area,
       location,
       landlord,
+      landlordId,
       images: imagePaths, // Add image paths to the property
     };
 

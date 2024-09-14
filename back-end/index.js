@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import { PORT, mongoDBURL } from "./config.js";
 import propertyRoutes from "./routes/propertyRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
+import applicationRoutes from "./routes/applicationRoutes.js"
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
@@ -29,6 +30,7 @@ app.use(cors(corsOptions));
 
 app.use("/api/properties", propertyRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/application", applicationRoutes);
 
 app.get("/", (req, res) => {
   res.send("Bismillah");

@@ -49,6 +49,10 @@ const propertySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    landlordId: {
+      type: String,
+      required: true,
+    },
     images: {
       type: [String], // Array of image paths
       required: false, // Not required if there might be no images initially

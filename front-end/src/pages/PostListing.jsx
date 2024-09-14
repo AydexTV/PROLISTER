@@ -41,6 +41,7 @@ const PostListing = () => {
     formData.append("latitude", data.latitude);
     formData.append("longitude", data.longitude);
     formData.append("landlord", user.name);
+    formData.append("landlordId", user.id);
 
     files.forEach((file) => {
       formData.append("images", file);

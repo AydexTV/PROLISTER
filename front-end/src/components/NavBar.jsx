@@ -107,7 +107,7 @@ const NavBar = ({ activeTab }) => {
                   </li>
                   <li>
                     <a
-                      href="#"
+                      href="/applications"
                       className="block px-4 py-2 text-sm text-[#758694] hover:bg-[#405D72] hover:text-[#758694]"
                     >
                       Applications

@@ -4,7 +4,7 @@ add profile (Done)
 
 add post listings (Done)
 
-add agreement page
+add agreement page (Done)
 
 remove About page and add some static some info about ProLister in Home
 
