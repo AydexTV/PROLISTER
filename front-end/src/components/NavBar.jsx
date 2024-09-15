@@ -50,7 +50,7 @@ const NavBar = ({ activeTab }) => {
   return (
     <nav className="bg-[#405D72] border-[#758694] shadow-2xl">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
-        <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
+        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <span className="self-center text-2xl font-semibold whitespace-nowrap text-[#FFF8F3]">
             ProLister
           </span>

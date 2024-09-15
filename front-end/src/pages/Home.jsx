@@ -32,7 +32,7 @@ const Home = () => {
   return (
     <div>
       {/* <NavBar isLoggedIn={true} activeTab="home" /> */}
-      <div className="flex flex-col justify-center items-center p-10">
+      <div className="flex flex-col justify-center items-center py-24 px-3">
         <h1 className="font-bold text-center text-5xl py-15">
           Welcome to ProLister
         </h1>
