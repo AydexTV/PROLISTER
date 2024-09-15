@@ -5,6 +5,7 @@ import axios from "axios";
 const Applications = () => {
   const { user } = useContext(UserContext);
   const [applications, setApplications] = useState([]);
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     // Only fetch applications if the user is logged in and is a landlord
@@ -12,7 +13,7 @@ const Applications = () => {
       const fetchApplications = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:3000/api/application/landlord/${user.id}`
+            `${backendUrl}/api/application/landlord/${user.id}`
           );
           setApplications(response.data);
         } catch (error) {

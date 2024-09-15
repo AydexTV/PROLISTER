@@ -5,11 +5,12 @@ export const UserContext = createContext({});
 
 export function UserContextProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); // Added loading state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const backendUrl = import.meta.env.VITE_BACKEND_URL; // Get the backend URL from environment variables
     axios
-      .get("http://localhost:3000/api/auth/profile")
+      .get(`${backendUrl}/api/auth/profile`)
       .then(({ data }) => {
         setUser(data);
       })
@@ -17,7 +18,7 @@ export function UserContextProvider({ children }) {
         console.error("Error fetching user data:", err);
       })
       .finally(() => {
-        setLoading(false); // Set loading to false once the request is complete
+        setLoading(false);
       });
   }, []);
 

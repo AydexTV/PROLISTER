@@ -8,6 +8,8 @@ const Agreement = () => {
   const location = useLocation();
   const { propertyId, propertyTitle, landlordId } = location.state; // Extract the property ID
 
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   // Get today's date and one year from today's date
   const startDate = new Date().toLocaleDateString();
   const endDate = new Date();
@@ -26,7 +28,7 @@ const Agreement = () => {
   const handleSubmit = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/application/apply",
+        `${backendUrl}/api/application/apply`,
         {
           userName: user.name,
           userEmail: user.email,

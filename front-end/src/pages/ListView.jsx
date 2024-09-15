@@ -13,11 +13,12 @@ const ListView = () => {
   const navigate = useNavigate();
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [properties, setProperties] = useState([]);
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/properties");
+        const response = await axios.get(`${backendUrl}/api/properties`);
         setProperties(response.data);
       } catch (error) {
         console.log("Error fetching properties:", error);

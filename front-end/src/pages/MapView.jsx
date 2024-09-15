@@ -10,11 +10,12 @@ import axios from "axios";
 const MapView = () => {
   const navigate = useNavigate();
   const [markers, setMarkers] = useState([]);
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/properties");
+        const response = await axios.get(`${backendUrl}/api/properties`);
         const properties = response.data;
 
         // Map properties to markers
@@ -22,7 +23,7 @@ const MapView = () => {
           coordinates: [property.location.coordinates[0], property.location.coordinates[1]],
           popUpTitle: property.title,
           popUpPrice: property.price,
-          popUpImage: `http://localhost:3000/${property.images[0].replace(/\\/g, "/")}`,
+          popUpImage: `${backendUrl}/${property.images[0].replace(/\\/g, "/")}`,
         }));
 
         setMarkers(markersData);

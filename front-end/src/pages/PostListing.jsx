@@ -5,6 +5,7 @@ import { useDropzone } from "react-dropzone";
 import { UserContext } from "../../context/userContext";
 
 const PostListing = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const { user } = useContext(UserContext);
   const {
     register,
@@ -49,7 +50,7 @@ const PostListing = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/properties",
+        `${backendUrl}/api/properties`,
         formData,
         {
           headers: {

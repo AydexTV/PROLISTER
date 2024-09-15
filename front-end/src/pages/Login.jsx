@@ -8,6 +8,7 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const navigate = useNavigate();
   const [data, setData] = useState({
     email: "",
@@ -20,7 +21,7 @@ const Login = () => {
     try {
       // axios returns many things among them data here we destructure and save data in a variable called data
       const { data } = await axios.post(
-        "http://localhost:3000/api/auth/login",
+        `${backendUrl}/api/auth/login`,
         {
           email,
           password,

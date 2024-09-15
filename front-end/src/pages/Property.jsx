@@ -16,6 +16,7 @@ const Property = () => {
   const { user } = useContext(UserContext);
   const { id } = useParams();
   const [property, setProperty] = useState(null);
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const navigate = useNavigate();
 
@@ -23,7 +24,7 @@ const Property = () => {
     const fetchProperty = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/properties/${id}`
+          `${backendUrl}/api/properties/${id}`
         );
         setProperty(response.data);
       } catch (error) {
@@ -56,7 +57,7 @@ const Property = () => {
   const slides =
     images.length > 0
       ? images.map((imgUrl) => ({
-          url: `http://localhost:3000/${imgUrl.replace(/\\/g, "/")}`,
+          url: `${backendUrl}/${imgUrl.replace(/\\/g, "/")}`,
         }))
       : [{ url: backgroundImage }];
 
@@ -65,7 +66,7 @@ const Property = () => {
       coordinates,
       popUpTitle: title,
       popUpPrice: price,
-      popUpImage: `http://localhost:3000/${property.images[0].replace(
+      popUpImage: `${backendUrl}/${property.images[0].replace(
         /\\/g,
         "/"
       )}`,

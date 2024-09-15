@@ -39,7 +39,8 @@ const NavBar = ({ activeTab }) => {
 
   const handleLogout = async () => {
     try {
-      await axios.post("http://localhost:3000/api/auth/logout", {}, { withCredentials: true });
+      const backendUrl = import.meta.env.VITE_BACKEND_URL; // Access backend URL from .env
+      await axios.post(`${backendUrl}/api/auth/logout`, {}, { withCredentials: true });
       setUser(null); // Clear user from context
       window.location.href = "/";
     } catch (error) {

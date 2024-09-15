@@ -8,6 +8,7 @@ import Footer from "../components/Footer";
 import backgroundImage from "../assets/images/lifestyle-home-house-garden-wallpaper-preview.jpg";
 
 const SignUp = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const navigate = useNavigate();
   const [data, setData] = useState({
     name: "",
@@ -21,7 +22,7 @@ const SignUp = () => {
     try {
       // axios returns many things among them data here we destructure and save data in a variable called data
       const { data } = await axios.post(
-        "http://localhost:3000/api/auth/signup",
+        `${backendUrl}/api/auth/signup`,
         {
           name,
           email,
