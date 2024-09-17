@@ -9,7 +9,7 @@ const router = express.Router();
 router.post("/signup", async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    
+
     // Check if name is entered
     if (!name) {
       return res.status(400).json({
@@ -76,13 +76,13 @@ router.post("/login", async (req, res) => {
         {},
         (err, token) => {
           if (err) throw err;
-          
+
           // Set the token in an httpOnly cookie
           res
             .cookie("token", token, {
               httpOnly: true,
-              secure: process.env.NODE_ENV === "production", // Use secure cookies in production
-              sameSite: "strict",
+              secure: process.env.NODE_ENV === "production", // Must be true if using HTTPS
+              sameSite: "none", // Allow cookies to be sent in cross-origin requests
             })
             .json({
               id: user._id,
