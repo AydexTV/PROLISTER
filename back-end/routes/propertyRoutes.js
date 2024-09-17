@@ -1,11 +1,11 @@
 import express from "express";
 import { Property } from "../models/property.js";
 import upload from "../middleware/upload.js"; // Import multer setup
+import cloudinary from "../middleware/cloudinaryConfig.js"; // Import Cloudinary config
 
 const router = express.Router();
 
 router.post("/", upload.array("images", 5), async (req, res) => {
-  console.log("Request Body:", req.body);
   try {
     const {
       title,
@@ -48,14 +48,23 @@ router.post("/", upload.array("images", 5), async (req, res) => {
     }
 
     const coordinates = [latitude, longitude];
-
     const location = {
       country,
       city,
       coordinates,
     };
 
-    const imagePaths = req.files.map((file) => file.path); // Get the paths of uploaded images
+    // Upload images to Cloudinary and get the URLs
+    const uploadedImages = [];
+    for (const file of req.files) {
+      const result = await cloudinary.uploader.upload_stream({ resource_type: "image" }, (error, result) => {
+        if (error) {
+          throw new Error("Cloudinary Upload Error: " + error.message);
+        }
+        return result.secure_url; // Get secure Cloudinary URL
+      }).end(file.buffer); // Pass the file buffer to Cloudinary
+      uploadedImages.push(result.secure_url); // Save the image URL
+    }
 
     const newProperty = {
       title,
@@ -68,11 +77,10 @@ router.post("/", upload.array("images", 5), async (req, res) => {
       location,
       landlord,
       landlordId,
-      images: imagePaths, // Add image paths to the property
+      images: uploadedImages, // Add the Cloudinary URLs to the property
     };
 
     const property = await Property.create(newProperty);
-
     return res.status(201).send(property);
   } catch (error) {
     console.log(error.message);

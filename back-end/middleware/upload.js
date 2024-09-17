@@ -1,18 +1,8 @@
-import multer from "multer";
-import path from "path";
+import multer from 'multer';
 
-// Configure Multer storage
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/property_images"); // Destination directory
-  },
-  filename: (req, file, cb) => {
-    // Generate a unique filename for the image
-    cb(null, Date.now() + path.extname(file.originalname));
-  },
-});
+// Multer configuration (no need to store locally)
+const storage = multer.memoryStorage(); // Store the file in memory as buffer
 
-// File filter to accept only images
 const fileFilter = (req, file, cb) => {
   if (file.mimetype.startsWith("image/")) {
     cb(null, true);
