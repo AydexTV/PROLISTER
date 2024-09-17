@@ -25,9 +25,9 @@ app.use("/uploads", express.static("uploads"));
 
 // Set up CORS to allow requests from your frontend
 const corsOptions = {
-  origin: FRONTEND_URL, // Your actual frontend URL
-  optionsSuccessStatus: 200,
-  credentials: true, // Allow cookies and other credentials
+  origin: FRONTEND_URL, // Allow requests from frontend URL
+  optionsSuccessStatus: 200, // Some browsers require a status of 200 for success
+  credentials: true,
 };
 app.use(cors(corsOptions));
 
