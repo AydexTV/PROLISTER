@@ -6,11 +6,13 @@ export const UserContext = createContext({});
 export function UserContextProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const backendUrl = import.meta.env.VITE_BACKEND_URL; // Get the backend URL from environment variables
 
   useEffect(() => {
-    const backendUrl = import.meta.env.VITE_BACKEND_URL; // Get the backend URL from environment variables
     axios
-      .get(`${backendUrl}/api/auth/profile`)
+      .get(`${backendUrl}/api/auth/profile`, {
+        withCredentials: true, // Add this line to ensure cookies are sent with the request
+      })
       .then(({ data }) => {
         setUser(data);
       })
