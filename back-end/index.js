@@ -24,17 +24,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/uploads", express.static("uploads"));
 
 // Set up CORS to allow requests from your frontend
-// const corsOptions = {
-//   origin: FRONTEND_URL, // Allow requests from frontend URL
-//   optionsSuccessStatus: 200, // Some browsers require a status of 200 for success
-//   credentials: true,
-// };
-// app.use(cors(corsOptions));
-
-app.use(cors({
-  origin: "*", // Allow all origins temporarily for debugging
-  credentials: true,
-}));
+const corsOptions = {
+  origin: FRONTEND_URL, // Your actual frontend URL
+  optionsSuccessStatus: 200,
+  credentials: true, // Allow cookies and other credentials
+};
+app.use(cors(corsOptions));
 
 // Routes
 app.use("/api/properties", propertyRoutes);
@@ -57,4 +52,3 @@ mongoose
   .catch((error) => {
     console.error("Database connection error:", error);
   });
-
