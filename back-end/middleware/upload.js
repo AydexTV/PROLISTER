@@ -1,6 +1,6 @@
 import multer from 'multer';
 
-// Multer configuration (no need to store locally)
+// Multer configuration (store in memory as a buffer)
 const storage = multer.memoryStorage(); // Store the file in memory as buffer
 
 const fileFilter = (req, file, cb) => {

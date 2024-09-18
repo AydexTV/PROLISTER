@@ -38,12 +38,14 @@ router.post("/", upload.array("images", 5), async (req, res) => {
       !landlord ||
       !landlordId
     ) {
+      console.log("Missing fields: ", req.body);
       return res.status(400).send({
         message: "Please provide all required fields",
       });
     }
 
     if (req.files.length > 5) {
+      console.log("Too many images: ", req.files.length);
       return res.status(400).send({ message: "Maximum 5 images are allowed" });
     }
 
@@ -57,13 +59,22 @@ router.post("/", upload.array("images", 5), async (req, res) => {
     // Upload images to Cloudinary and get the URLs
     const uploadedImages = [];
     for (const file of req.files) {
-      const result = await cloudinary.uploader.upload_stream({ resource_type: "image" }, (error, result) => {
-        if (error) {
-          throw new Error("Cloudinary Upload Error: " + error.message);
-        }
-        return result.secure_url; // Get secure Cloudinary URL
-      }).end(file.buffer); // Pass the file buffer to Cloudinary
-      uploadedImages.push(result.secure_url); // Save the image URL
+      try {
+        const result = await new Promise((resolve, reject) => {
+          cloudinary.uploader.upload_stream({ folder: "properties" }, (error, result) => {
+            if (error) {
+              console.log("Cloudinary error: ", error);
+              reject(error);
+            } else {
+              resolve(result);
+            }
+          }).end(file.buffer); // Upload the file buffer directly
+        });
+        uploadedImages.push(result.secure_url); // Save the Cloudinary URL
+      } catch (error) {
+        console.log("Error uploading image: ", error.message);
+        return res.status(500).send({ message: "Error uploading image to Cloudinary" });
+      }
     }
 
     const newProperty = {
@@ -83,10 +94,12 @@ router.post("/", upload.array("images", 5), async (req, res) => {
     const property = await Property.create(newProperty);
     return res.status(201).send(property);
   } catch (error) {
-    console.log(error.message);
+    console.log("Server error: ", error.message);
     res.status(500).send({ message: error.message });
   }
 });
+
+
 
 router.get("/", async (req, res) => {
   try {

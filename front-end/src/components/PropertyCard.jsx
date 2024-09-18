@@ -6,8 +6,6 @@ import { formatDistanceToNow } from "date-fns";
 const PropertyCard = ({ property }) => {
   const { title, price, images, createdAt, location } = property;
 
-  const backendUrl = import.meta.env.VITE_BACKEND_URL;
-
   return (
     <Link
       className="flex flex-col lg:flex-row justify-center lg:h-52 lg:w-[700px] bg-[#7a716a]/50 py-5 px-8 my-5 rounded-2xl cursor-pointer"
@@ -15,7 +13,7 @@ const PropertyCard = ({ property }) => {
     >
       <div className="relative w-full lg:h-full lg:w-1/3 mr-10 rounded-2xl shadow-2xl overflow-hidden">
         <img
-          src={`${backendUrl}/${images[0].replace(/\\/g, "/")}`} // Replace backslashes with forward slashes
+          src={images[0]} // Directly using the Cloudinary URL
           alt="Property"
           className="w-full h-full object-cover object-center"
         />

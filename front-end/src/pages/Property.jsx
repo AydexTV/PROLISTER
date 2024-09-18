@@ -23,16 +23,14 @@ const Property = () => {
   useEffect(() => {
     const fetchProperty = async () => {
       try {
-        const response = await axios.get(
-          `${backendUrl}/api/properties/${id}`
-        );
+        const response = await axios.get(`${backendUrl}/api/properties/${id}`);
         setProperty(response.data);
       } catch (error) {
         console.log("Error fetching property:", error);
       }
     };
     fetchProperty();
-  }, []);
+  }, [id]);
 
   if (!property) {
     return <div>Loading...</div>;
@@ -51,13 +49,12 @@ const Property = () => {
     landlordId,
   } = property;
 
-  // Ensure location and its properties exist before using them
   const coordinates = location?.coordinates || [0, 0];
 
   const slides =
     images.length > 0
       ? images.map((imgUrl) => ({
-          url: `${backendUrl}/${imgUrl.replace(/\\/g, "/")}`,
+          url: imgUrl, // Use the direct Cloudinary URL
         }))
       : [{ url: backgroundImage }];
 
@@ -66,17 +63,13 @@ const Property = () => {
       coordinates,
       popUpTitle: title,
       popUpPrice: price,
-      popUpImage: `${backendUrl}/${property.images[0].replace(
-        /\\/g,
-        "/"
-      )}`,
+      popUpImage: images[0], // Directly using Cloudinary image URL
     },
   ];
 
   return (
     <div>
       {/* <NavBar isLoggedIn={false} /> */}
-      {/* Top Section where we show Title and photos */}
       <div className="flex justify-center">
         <div className="flex flex-col justify-center m-10 2xl:text-4xl text-3xl">
           <div>
@@ -95,11 +88,11 @@ const Property = () => {
           <Carousel slides={slides} />
         </div>
       </div>
+
       {/* Second section divided into left and right parts */}
       <div className="flex 2xl:flex-row flex-col bg-[#F7E7DC] py-7">
         {/* Left part for description and map view */}
         <div className="flex flex-col items-center basis-9/12 p-3">
-          {/* Box for number of Rooms, toilets, and area */}
           <div className="flex justify-around items-center h-16 p-2 w-full bg-[#405D72]/40 rounded-3xl shadow-2xl">
             <div className="flex items-center">
               <LiaBedSolid className="h-7 w-auto" />
@@ -114,25 +107,24 @@ const Property = () => {
               <h1 className="ml-2">{area} msq</h1>
             </div>
           </div>
-          {/* Description */}
           <div className="flex flex-col m-10">
             <h1 className="mb-5 text-2xl">Description:</h1>
             <p>{description}</p>
           </div>
-          {/* Map view */}
           <div className="h-96 w-full">
             <div className="flex justify-center items-center h-full w-full">
               <MapBox markers={marker} />
             </div>
           </div>
         </div>
+
         {/* Right side for landlord details and contact info */}
         <div className="basis-3/12 p-10 mt-10">
           <div className="flex flex-col items-center bg-[#405D72] h-96 w-full pt-10 rounded-2xl shadow-2xl">
             <div
               className="rounded-full h-52 w-52 shadow-inner"
               style={{
-                backgroundImage: `url(${pfp})`, // Use template literals for dynamic URL
+                backgroundImage: `url(${pfp})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
@@ -142,8 +134,10 @@ const Property = () => {
             <a
               className="mt-5 p-2 bg-[#758694] text-white hover:bg-[#F7E7DC] hover:text-[black] rounded-3xl shadow-2xl cursor-pointer"
               onClick={() =>
-                navigate("/agreement", { state: { propertyId: id, propertyTitle: title, landlordId: landlordId } })
-              } // Send title to Agreement page
+                navigate("/agreement", {
+                  state: { propertyId: id, propertyTitle: title, landlordId },
+                })
+              }
             >
               Apply
             </a>
